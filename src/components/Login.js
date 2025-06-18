@@ -37,7 +37,7 @@ function Login() {
         formData.append("password", senha);
 
         try {
-            const response = await fetch("http://localhost:8080/pessoas/pessoas12", {
+            const response = await fetch("http://backend-25v2.onrender.com/pessoas/pessoas12", {
                 method: "POST",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
                 body: formData.toString(),

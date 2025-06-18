@@ -17,6 +17,10 @@ class JwtFilter(
     override fun shouldNotFilter(request: HttpServletRequest): Boolean {
         val path = request.servletPath
         return path.startsWith("/auth") ||
+               path.startsWith("/pessoas") || 
+               path.startsWith("/produtos") ||
+               path.startsWith("/doacoes") ||
+               path.startsWith("/relatorio") ||
                path.startsWith("/swagger-ui") ||
                path.startsWith("/v3/api-docs") ||
                path.startsWith("/h2-console")
@@ -48,7 +52,6 @@ class JwtFilter(
                     }
                 }
             } catch (ex: Exception) {
-                // Aqui você pode logar o erro ou simplesmente ignorar para seguir o fluxo sem autenticação
                 println("Erro na validação do token: ${ex.message}")
             }
         }

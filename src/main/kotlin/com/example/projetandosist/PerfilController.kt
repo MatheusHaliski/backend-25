@@ -9,7 +9,7 @@ import org.springframework.web.multipart.MultipartFile
 
 @RestController
 @RequestMapping("/perfil")
-@CrossOrigin(origins = ["http://localhost:3000"])
+@CrossOrigin(origins = "https://front-end25v8.onrender.com")
 class PerfilController(
     private val pessoaRepository: PessoaRepository
 ) {

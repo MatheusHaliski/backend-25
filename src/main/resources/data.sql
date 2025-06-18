@@ -1,3 +1,4 @@
+DELETE FROM PRODUTO;
 INSERT INTO PRODUTO (id, categoria, descricao, imagem, nome, preco) VALUES
 (1, 'Computador', 'Notebook Dell Inspiron 15, Intel i7, 16GB RAM, SSD 512GB', null, 'Notebook Dell', 3500.00),
 (2, 'Computador', 'Desktop HP Pro, Intel i5, 8GB RAM, SSD 256GB', null, 'Desktop HP', 2800.00),

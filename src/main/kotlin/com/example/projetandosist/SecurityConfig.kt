@@ -19,8 +19,6 @@ class SecurityConfig(
     private val pessoaRepository: PessoaRepository
 ) {
 
-
-
     @Bean
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
         http
@@ -52,12 +50,11 @@ class SecurityConfig(
         return http.build()
     }
 
-
     @Bean
     fun corsConfigurationSource(): CorsConfigurationSource {
         val configuration = CorsConfiguration()
-        configuration.allowedOrigins = listOf("https://front-end25v8.onrender.com/")
-        configuration.allowedMethods = Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS")
+        configuration.allowedOrigins = listOf("https://front-end25v8.onrender.com")
+        configuration.allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS")
         configuration.allowedHeaders = listOf("*")
         configuration.allowCredentials = true
 

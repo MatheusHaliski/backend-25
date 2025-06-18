@@ -10,7 +10,7 @@ import java.net.URI
 
 @RestController
 @RequestMapping("/doacoes")
-@CrossOrigin(origins = ["http://localhost:3000"])
+@CrossOrigin(origins = "https://front-end25v8.onrender.com")
 class DoacaoController(
     private val doacoesRepository: DoacoesRepository,
     private val pessoaRepository: PessoaRepository

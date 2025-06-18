@@ -3,6 +3,7 @@ package com.example.projetandosist
 import org.springframework.boot.CommandLineRunner
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.web.bind.annotation.CrossOrigin
 
 @Configuration
 @CrossOrigin(origins = "https://front-end25v8.onrender.com")

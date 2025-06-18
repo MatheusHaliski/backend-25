@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.web.bind.annotation.CrossOrigin
 
 @Configuration
-@CrossOrigin(origins = "https://front-end25v8.onrender.com")
+@CrossOrigin(origins = ["https://front-end25v8.onrender.com"])
 class DataInitializr {
 
     @Bean

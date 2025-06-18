@@ -10,6 +10,7 @@ import kotlin.io.encoding.ExperimentalEncodingApi
 
 @RestController
 @RequestMapping("/produtos")
+@CrossOrigin(origins = "https://front-end25v8.onrender.com")
 class ProdutoController(
     private val produtoRepository: ProdutoRepository,
     private val googleImageSearchService: GoogleImageSearchService

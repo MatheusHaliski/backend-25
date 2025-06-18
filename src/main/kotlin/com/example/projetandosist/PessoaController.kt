@@ -10,6 +10,7 @@ import java.net.URI
 
 @RestController
 @RequestMapping("/pessoas")
+@CrossOrigin(origins = "https://front-end25v8.onrender.com")
 class PessoaController(
     private val pessoaRepository: PessoaRepository,
     private val emailService: EmailService

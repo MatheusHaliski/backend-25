@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(origins = "https://front-end25v8.onrender.com")
+@CrossOrigin(origins = ["https://front-end25v8.onrender.com"])
 class AuthController(
     private val pessoaRepository: PessoaRepository,
     private val jwtUtil: JwtUtil,

@@ -11,7 +11,7 @@ class CorsConfig {
             override fun addCorsMappings(registry: CorsRegistry) {
                 registry.addMapping("/**")
                     .allowedOrigins(
-                        "https://front-end25v4.vercel.app",
+                        "https://front-end25v5.vercel.app",
                         "http://localhost:3000"
                     ) // permite Vercel e local
                     .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")

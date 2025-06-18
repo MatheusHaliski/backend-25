@@ -1,12 +1,26 @@
-# Etapa 1: Construção da aplicação
-FROM gradle:8.5.0-jdk17 AS build
+# Etapa de build
+FROM gradle:8.5-jdk17 as builder
+
+# Instalar JDK 21 manualmente
+RUN apt-get update && \
+    apt-get install -y wget && \
+    wget https://download.java.net/java/GA/jdk21/1/GPL/openjdk-21_linux-x64_bin.tar.gz && \
+    tar -xvf openjdk-21_linux-x64_bin.tar.gz && \
+    mv jdk-21 /opt/jdk-21
+
+ENV JAVA_HOME=/opt/jdk-21
+ENV PATH="${JAVA_HOME}/bin:${PATH}"
+
 COPY --chown=gradle:gradle . /home/gradle/project
 WORKDIR /home/gradle/project
+
 RUN gradle build --no-daemon
 
-# Etapa 2: Criação da imagem final
-FROM eclipse-temurin:17-jre
+# Etapa de execução
+FROM eclipse-temurin:21-jre
+WORKDIR /app
+COPY --from=builder /home/gradle/project/build/libs/*.jar app.jar
+
 EXPOSE 8080
-ARG JAR_FILE=build/libs/*.jar
-COPY --from=build /home/gradle/project/${JAR_FILE} app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
+
+CMD ["java", "-jar", "app.jar"]

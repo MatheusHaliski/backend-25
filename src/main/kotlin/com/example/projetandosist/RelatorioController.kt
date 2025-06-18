@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/relatorio")
-@CrossOrigin(origins = ["http://localhost:3000"])
+@CrossOrigin(origins = "https://front-end25v8.onrender.com")
 class RelatorioController(
     private val doacoesRepository: DoacoesRepository
 ) {

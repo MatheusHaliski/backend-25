@@ -17,9 +17,9 @@ class JwtFilter(
     override fun shouldNotFilter(request: HttpServletRequest): Boolean {
         val path = request.servletPath
         return path.startsWith("/auth") ||
-                path.startsWith("/swagger-ui") ||
-                path.startsWith("/v3/api-docs") ||
-                path.startsWith("/h2-console")
+               path.startsWith("/swagger-ui") ||
+               path.startsWith("/v3/api-docs") ||
+               path.startsWith("/h2-console")
     }
 
     override fun doFilterInternal(
@@ -27,28 +27,32 @@ class JwtFilter(
         response: HttpServletResponse,
         filterChain: FilterChain
     ) {
-        val authHeader = request.getHeader("Authorization")
-        if (authHeader != null && authHeader.startsWith("Bearer ")) {
-            val token = authHeader.substring(7)
-            if (jwtUtil.validateToken(token)) {
-                val email = jwtUtil.getEmail(token)
-                val pessoa = pessoaRepository.findByEmail(email)
-                if (pessoa != null) {
-                    val authorities = listOf(SimpleGrantedAuthority(pessoa.tipoDeUsuario.toString()))
-                    val authentication = UsernamePasswordAuthenticationToken(
-                        pessoa, null, authorities
-                    )
-                    SecurityContextHolder.getContext().authentication = authentication
+        val authorizationHeader = request.getHeader("Authorization")
+
+        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+            val token = authorizationHeader.substring(7)
+
+            try {
+                if (jwtUtil.validateToken(token)) {
+                    val email = jwtUtil.getEmail(token)
+                    val pessoa = pessoaRepository.findByEmail(email)
+
+                    if (pessoa != null) {
+                        val authorities = listOf(SimpleGrantedAuthority(pessoa.tipoDeUsuario.toString()))
+                        val authentication = UsernamePasswordAuthenticationToken(
+                            pessoa,
+                            null,
+                            authorities
+                        )
+                        SecurityContextHolder.getContext().authentication = authentication
+                    }
                 }
+            } catch (ex: Exception) {
+                // Aqui você pode logar o erro ou simplesmente ignorar para seguir o fluxo sem autenticação
+                println("Erro na validação do token: ${ex.message}")
             }
         }
-        filterChain.doFilter(request, response)
-    }
 
-    private fun getToken(request: HttpServletRequest): String? {
-        val authHeader = request.getHeader("Authorization")
-        return if (authHeader != null && authHeader.startsWith("Bearer ")) {
-            authHeader.substring(7)
-        } else null
+        filterChain.doFilter(request, response)
     }
 }

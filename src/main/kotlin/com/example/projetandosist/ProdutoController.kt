@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.CrossOrigin
 
 @RestController
 @RequestMapping("/produtos")
-@CrossOrigin(origins = "https://front-end25v8.onrender.com")
+@CrossOrigin(origins = ["https://front-end25v8.onrender.com"])
 class ProdutoController(
     private val produtoRepository: ProdutoRepository,
     private val googleImageSearchService: GoogleImageSearchService
